@@ -23,7 +23,8 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.war'
+                archiveArtifacts allowEmptyArchive: true,
+                artifacts: '**/demo*.war'
             }
         }
         stage('Deploy') {
