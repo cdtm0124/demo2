@@ -50,6 +50,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>ROOT</finalName> <!-- Ensures WAR is named ROOT.war -->
+		<finalName>${project.artifactId}</finalName>
 	</build>
 </project>
