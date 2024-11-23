@@ -1,4 +1,4 @@
 FROM tomcat:latest
-ADD target/*.war /usr/local/tomcat/webapps
+ADD target/demo.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8081
 CMD ["catalina.sh", "run"]
