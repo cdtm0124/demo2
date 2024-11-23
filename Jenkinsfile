@@ -17,6 +17,11 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage('Verify WAR File') {
+            steps {
+                sh 'test -f target/demo.war || { echo "WAR file not found! Build failed."; exit 1; }'
+            }
+        }
         stage('Archive') {
             steps {
                 archiveArtifacts allowEmptyArchive: true, artifacts: '**/demo*.war'
