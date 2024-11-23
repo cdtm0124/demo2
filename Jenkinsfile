@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        git 'Default'
-    }
-
     stages {
         stage('GetProject') {
             steps {
@@ -13,7 +9,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean:clean'
+                sh 'mvn clean'
             }
         }
         stage('Package') {
@@ -23,16 +19,14 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                archiveArtifacts allowEmptyArchive: true,
-                artifacts: '**/demo*.war'
+                archiveArtifacts allowEmptyArchive: true, artifacts: '**/demo*.war'
             }
         }
         stage('Deploy') {
             steps {
                 sh 'docker build -f Dockerfile -t myapp .'
                 sh 'docker rm -f "myappcontainer" || true'
-                sh  'docker run --name "myappcontainer" -p 8081:8080 --detach myapp:latest
-
+                sh 'docker run --name "myappcontainer" -p 8081:8080 --detach myapp:latest'
             }
         }
     }
